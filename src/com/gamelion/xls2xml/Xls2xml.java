@@ -1,7 +1,9 @@
 package com.gamelion.xls2xml;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.FileSystems;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
@@ -11,7 +13,7 @@ public class Xls2xml {
 	static Path outputDirectoryPath;
 	static int rowStart = 0;
 	static int columnKey = 0;
-	static ArrayList<LangSheetInfo> lngsInfo = new ArrayList<>();
+	static ArrayList<LangSheetInfo> lngsInfo = new ArrayList<LangSheetInfo>();
 
 	/**
 	 * @param args
@@ -20,8 +22,19 @@ public class Xls2xml {
 		parseArg(args);
 		
 		XlsReader reader = new XlsReader();
-		
 		reader.read(inputPath, rowStart, columnKey, lngsInfo);
+		
+		//FileSystems.getDefault().
+		
+		try {
+			Files.createDirectories(outputDirectoryPath);
+			XmlWriter writer = new XmlWriter();
+			writer.write(outputDirectoryPath);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 	
@@ -29,6 +42,10 @@ public class Xls2xml {
 		
 		if ( args.length < 5 ) {
 			System.err.println( "Arguments error!" );
+			for ( String arg : args ) {
+				System.out.println("| " + arg);
+			}
+			
 			printExample();
 			System.exit( -1 );
 		}

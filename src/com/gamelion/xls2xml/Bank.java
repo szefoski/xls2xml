@@ -4,10 +4,10 @@ import java.util.HashMap;
 
 public class Bank {
 	
-	static protected HashMap<String, Dict> dicts = new HashMap<>();
+	static protected HashMap<String, Dict> dicts = new HashMap<String, Dict>();
 	
 	static void add( String key, String value, String lang ) {
-		Dict dict = dicts.get(key);
+		Dict dict = dicts.get(lang);
 		
 		if ( dict == null ) {
 			dict = new Dict();

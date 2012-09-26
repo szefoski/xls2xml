@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Dict {
 	
-	protected ArrayList<DictElement> elements = new ArrayList<>();
+	protected ArrayList<DictElement> elements = new ArrayList<DictElement>();
 	
 	
 	public void Add( String key, String value ) {
