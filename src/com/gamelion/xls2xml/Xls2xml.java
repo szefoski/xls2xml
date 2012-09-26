@@ -17,8 +17,6 @@ public class Xls2xml {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		System.out.println("Hello Eclipse!");
-		
 		parseArg(args);
 		
 		XlsReader reader = new XlsReader();
