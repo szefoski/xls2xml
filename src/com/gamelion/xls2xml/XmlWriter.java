@@ -1,7 +1,6 @@
 package com.gamelion.xls2xml;
 
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
+import java.io.File;
 import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -19,14 +18,14 @@ import org.w3c.dom.Element;
 
 public class XmlWriter {
 
-	public void write( Path destinationDirecory ) {
+	public void write( String destinationDirecory ) {
 		for (  Map.Entry<String, Dict> val: Bank.dicts.entrySet() ) {
-			Path destFilePath = FileSystems.getDefault().getPath(destinationDirecory.toString(), val.getKey() + ".xml");
+			File destFilePath = new File(destinationDirecory, val.getKey() + ".xml");
 			writeLang(destFilePath, val.getValue());
 		}
 	}
 	
-	private void writeLang( Path dest, Dict dict ) {
+	private void writeLang( File dest, Dict dict ) {
 		try {
 			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder;
@@ -48,7 +47,7 @@ public class XmlWriter {
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 			transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
 			DOMSource source = new DOMSource(doc);
-			StreamResult result = new StreamResult(dest.toFile());
+			StreamResult result = new StreamResult(dest);
 
 			transformer.transform(source, result);
 

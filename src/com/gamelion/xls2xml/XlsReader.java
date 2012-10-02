@@ -1,9 +1,9 @@
 package com.gamelion.xls2xml;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -16,10 +16,12 @@ import com.gamelion.xls2xml.Xls2xml.LangSheetInfo;
 
 public class XlsReader {
 	
-	public void read( Path input, int keysStartRow, int keysColumn, ArrayList<LangSheetInfo> lngsInfo ) {
+	public void read( File inputFile, int keysStartRow, int keysColumn, ArrayList<LangSheetInfo> lngsInfo ) {
 		InputStream in = null;
 		try {
-			in = Files.newInputStream(input);
+			
+			in = new FileInputStream(inputFile);
+			
 			HSSFWorkbook workbook = new HSSFWorkbook( in );
 			HSSFSheet sheet = workbook.getSheetAt(0);
 			ReadSheet(sheet, keysStartRow, keysColumn, lngsInfo);
