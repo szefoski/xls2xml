@@ -44,7 +44,7 @@ public class XlsReader {
 	
 	private void ReadSheet( HSSFSheet sheet, int keysStartRow, int keysColumn, ArrayList<LangSheetInfo> lngsInfo ) {
 
-		for ( int i = keysStartRow; i < sheet.getLastRowNum(); i++ ) {
+		for ( int i = keysStartRow; i <= sheet.getLastRowNum(); i++ ) {
 			HSSFRow row = sheet.getRow(i);
 			HSSFCell keyCell = row.getCell( keysColumn );
 			String keyVal = getCellValue( keyCell );
