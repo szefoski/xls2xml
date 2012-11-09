@@ -47,8 +47,9 @@ public class XlsReader {
 		for ( int i = keysStartRow; i <= sheet.getLastRowNum(); i++ ) {
 			HSSFRow row = sheet.getRow(i);
 			HSSFCell keyCell = row.getCell( keysColumn );
-			String keyVal = getCellValue( keyCell );
 			
+			String keyVal = getCellValue( keyCell );
+
 			if ( keyVal.isEmpty() ) {
 				break;
 			}
@@ -71,6 +72,11 @@ public class XlsReader {
 	private String getCellValue( HSSFCell cell ) {
 		String val = null;
 		
+		if ( cell == null )
+		{
+			return "";
+		}
+		
 		switch ( cell.getCellType() ) {
 		case Cell.CELL_TYPE_BLANK:
 			val = "";
@@ -83,7 +89,7 @@ public class XlsReader {
 			System.exit( -1 );
 			break;
 		case Cell.CELL_TYPE_FORMULA:
-			val = cell.getCellFormula();
+			val = cell.getStringCellValue();
 			break;
 		case Cell.CELL_TYPE_NUMERIC:
 			val = String.valueOf(cell.getNumericCellValue());
